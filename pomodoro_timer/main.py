@@ -50,6 +50,8 @@ def countdown(time_in_secs,title):
               , help = 'break duration in minutes', type = int)
 @click.option('-r','--rounds',default = 2
               , help = 'the number of rounds', type = int)
+@click.option('-l','--long-break',default = 20
+              ,help = 'long break duration in minutes', type = int)
 def main(work_time,break_time,rounds):
     """
     Runs a Pomodoro timer loop with specified work time, break time
