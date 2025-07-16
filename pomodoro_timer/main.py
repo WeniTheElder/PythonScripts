@@ -9,7 +9,7 @@ the user can change the duration of the work_time, break_time, and number of rou
 import time
 import click
 import notify2
-from playsound import playsound
+import pygame
 
 
 notify2.init('Pomodoro timer')
@@ -19,11 +19,13 @@ work_message        = notify2.Notification("Pomodoro", "Time to work!", path_to_
 short_break_message = notify2.Notification("Pomodoro", "Take a break!", path_to_png)
 long_break_message  = notify2.Notification("Pomodoro", "time for a long break!", path_to_png)
 finish_message      = notify2.Notification("Pomodoro","you're done for today!, good job", path_to_png)
+pygame.mixer.init()
+pygame.mixer.music.load(path_to_sound)
 CYCLES              = 4
 
 def notify(notification):
     notification.show()
-    playsound(path_to_sound)
+    pygame.mixer.music.play()
 
 def countdown(time_in_secs,title):
     timer = time_in_secs
