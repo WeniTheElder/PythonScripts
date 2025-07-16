@@ -13,13 +13,17 @@ from playsound import playsound
 
 
 notify2.init('Pomodoro timer')
-work_message        = notify2.Notification("Pomodoro", "Time to work!")
-short_break_message = notify2.Notification("Pomodoro", "Take a break!")
-long_break_message  = notify2.Notification("Pomodoro", "time for a long break!")
-finish_message      = notify2.Notification("you're done for today!, good job")
 path_to_sound       = '/home/ahmad-abdullatif/pythonProjects/pomodoro_timer/mixkit-bell-notification-933.wav'
+path_to_png         = '/home/ahmad-abdullatif/pythonProjects/pomodoro_timer/tomato.png'
+work_message        = notify2.Notification("Pomodoro", "Time to work!", path_to_png)
+short_break_message = notify2.Notification("Pomodoro", "Take a break!", path_to_png)
+long_break_message  = notify2.Notification("Pomodoro", "time for a long break!", path_to_png)
+finish_message      = notify2.Notification("Pomodoro","you're done for today!, good job", path_to_png)
 CYCLES              = 4
 
+def notify(notification):
+    notification.show()
+    playsound(path_to_sound)
 
 def countdown(time_in_secs,title):
     timer = time_in_secs
@@ -45,19 +49,16 @@ def main(work_time,break_time,long_break,rounds):
     round_counter   = 0
     
     while round_counter < rounds:
-        work_message.show()
-        playsound(path_to_sound)
+        notify(work_message)
         print('--------------------------------')
         countdown(work_time*60,f'session {session_counter}')
         
         if session_counter < CYCLES:
-            short_break_message.show()
-            playsound(path_to_sound)
+            notify(short_break_message)
             countdown(break_time*60,f'break {session_counter}')
             session_counter += 1
         else:
-            long_break_message.show()
-            playsound(path_to_sound)
+            notify(long_break_message)
             countdown(long_break*60,'long break')
             round_counter += 1
             session_counter = 1
