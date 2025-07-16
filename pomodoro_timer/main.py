@@ -9,7 +9,15 @@ the user can change the duration of the work_time, break_time, and number of rou
 import time
 import click
 import notify2
+import os
+import sys
+# Silence pygame's welcome message
+stdout_backup = sys.stdout
+sys.stdout = open(os.devnull, 'w')
 import pygame
+pygame.mixer.init()
+sys.stdout.close()
+sys.stdout = stdout_backup
 
 
 notify2.init('Pomodoro timer')
