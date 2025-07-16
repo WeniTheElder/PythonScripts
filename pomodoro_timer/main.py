@@ -1,3 +1,4 @@
+#!/home/ahmad-abdullatif/pythonProjects/pp_venv/bin/python3
 """
 this module implements a cli tool pomodoro timer
 the module uses click to parse arguments, time for program sleep, 
@@ -19,6 +20,7 @@ work_message = notify2.Notification("Pomodoro", "Time to work!")
 short_break_message = notify2.Notification("Pomodoro", "Take a break!")
 long_break_message = notify2.Notification("Pomodoro", "time for a long break!")
 finish_message = notify2.Notification("you're done for today!, good job")
+path_to_sound = '/home/ahmad-abdullatif/pythonProjects/pomodoro_timer/mixkit-bell-notification-933.wav'
 
 
 def countdown(time_in_secs,title):
@@ -62,22 +64,22 @@ def main(work_time,break_time,rounds):
     round_counter = 0
     while round_counter < rounds:
         work_message.show()
-        playsound('mixkit-bell-notification-933.wav')
+        playsound(path_to_sound)
         countdown(work_time*60,f'session {session_counter}')
         if session_counter < CYCLES:
             short_break_message.show()
-            playsound('mixkit-bell-notification-933.wav')
+            playsound(path_to_sound)
             countdown(break_time*60,f'break {session_counter}')
             session_counter += 1
         else:
             long_break_message.show()
-            playsound('mixkit-bell-notification-933.wav')
+            playsound(path_to_sound)
             countdown(LONG_BREAK*60,'long break')
             round_counter += 1
             session_counter = 1
     print("you're done for today!, good job")
     finish_message.show()
-    playsound('mixkit-bell-notification-933.wav')
+    playsound(path_to_sound)
 
 
 if __name__ == '__main__':
