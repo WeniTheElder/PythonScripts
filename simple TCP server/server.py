@@ -21,8 +21,6 @@ def handle_client(client_socket, client_address):
                 break
 def server_program():
     with socket.socket() as server:
-        print("to stop enter 'q' without the quotes")
-        
         server.bind(('localhost',SERVER_PORT))
         server.listen()
         
