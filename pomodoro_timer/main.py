@@ -9,31 +9,26 @@ the user can change the duration of the work_time, break_time, and number of rou
 import time
 import click
 import notify2
-import os
-import sys
-# Silence pygame's welcome message
-stdout_backup = sys.stdout
-sys.stdout = open(os.devnull, 'w')
-import pygame
-pygame.mixer.init()
-sys.stdout.close()
-sys.stdout = stdout_backup
+import vlc
 
+
+CYCLES              = 4
+path_to_sound       = '/home/ahmad-abdullatif/pythonProjects/pomodoro_timer/sound.wav'
+path_to_png         = '/home/ahmad-abdullatif/pythonProjects/pomodoro_timer/tomato.png'
 
 notify2.init('Pomodoro timer')
-path_to_sound       = '/home/ahmad-abdullatif/pythonProjects/pomodoro_timer/mixkit-bell-notification-933.wav'
-path_to_png         = '/home/ahmad-abdullatif/pythonProjects/pomodoro_timer/tomato.png'
+sound = vlc.MediaPlayer(path_to_sound)
+
 work_message        = notify2.Notification("Pomodoro", "Time to work!", path_to_png)
 short_break_message = notify2.Notification("Pomodoro", "Take a break!", path_to_png)
 long_break_message  = notify2.Notification("Pomodoro", "time for a long break!", path_to_png)
 finish_message      = notify2.Notification("Pomodoro","you're done for today!, good job", path_to_png)
-pygame.mixer.init()
-pygame.mixer.music.load(path_to_sound)
-CYCLES              = 4
+
+
 
 def notify(notification):
     notification.show()
-    pygame.mixer.music.play()
+    sound.play()
 
 def countdown(time_in_secs,title):
     timer = time_in_secs
@@ -73,10 +68,9 @@ def main(work_time,break_time,long_break,rounds):
             round_counter += 1
             session_counter = 1
         
+    notify(finish_message)
     print("you're done for today!, good job")
-    finish_message.show()
-    playsound(path_to_sound)
 
 
 if __name__ == '__main__':
-    main()  # pylint: disable=no-value-for-parameter
+    main()
