@@ -2,7 +2,6 @@ import socket
 import threading
 
 SERVER_PORT = 2000
-counter = 0
 
 def handle_client(client_socket, client_address):
     print(f"connection started with address {client_address}")
