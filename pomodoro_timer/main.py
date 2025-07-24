@@ -25,8 +25,8 @@ long_break_message  = notify2.Notification("Pomodoro", "time for a long break!",
 finish_message      = notify2.Notification("Pomodoro","you're done for today!, good job", path_to_png)
 
 
-
 def notify(notification):
+    sound.stop()
     notification.show()
     sound.play()
 
